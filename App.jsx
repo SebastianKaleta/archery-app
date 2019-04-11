@@ -1,54 +1,3 @@
-const Arms = props => {
-  return (
-    <React.Fragment>
-      <label>
-        Podaj rozpiętość ramion
-        <input name="arms" type="number" />
-      </label>
-      <br />
-    </React.Fragment>
-  );
-};
-
-const Hight = props => {
-  return (
-    <React.Fragment>
-      <label>
-        Podaj wzrost
-        <input name="hight" type="number" placeholder="np.175" />
-      </label>
-      <br />
-    </React.Fragment>
-  );
-};
-const Level = props => {
-  return (
-    <React.Fragment>
-      <label>
-        Podaj stopień zaawansowania
-        <select name="level">
-          <option value="1">Beginner</option>
-          <option value="2">Medium</option>
-          <option value="3">Expert</option>
-        </select>
-      </label>
-      <br />
-    </React.Fragment>
-  );
-};
-
-const Sex = props => {
-  return (
-    <React.Fragment>
-      <label>
-        Podaj płeć
-        {/* Tu ma być dopisany wybór M/K w select lub checkbox */}
-      </label>
-      <br />
-    </React.Fragment>
-  );
-};
-
 class InfoField extends React.Component {
   state = {
     level: "",
@@ -63,16 +12,44 @@ class InfoField extends React.Component {
     });
   };
 
+
   render() {
     return (
       <React.Fragment>
         <h1>Archery app</h1>
         <h2>Podaj dane</h2>
         <div>
-          <Level value={this.state.level} onChange={this.handleChange} />
-          <Hight value={this.state.hight} onChange={this.handleChange} />
-          <Arms value={this.props.arms} onChange={this.handleChange} />
-          <Sex value={this.props.sex} onChange={this.handleChange} />
+          <label>
+            Podaj rozpiętość ramion
+        <input className="form__input" name="arms" type="number" placeholder="0" min="0" max="200" value={this.props.arms} onChange={this.handleChange} />
+          </label>
+          <br />
+          <label>
+            Podaj wzrost
+        <input className="form__input" name="hight" type="number" placeholder="0" min="0" max="300" value={this.state.hight} onChange={this.handleChange} />
+          </label>
+          <br />
+          <label>
+            Podaj stopień zaawansowania
+        <select className="form__input" name="level" value={this.state.level} onChange={this.handleChange}>
+              <option value="choose">Choose level</option>
+              <option value="beginner">Beginner</option>
+              <option value="medium">Medium</option>
+              <option value="expert">Expert</option>
+            </select>
+          </label>
+          <br />
+          <label>
+            Podaj płeć
+
+            <select className="form__input" name="sex" value={this.state.sex} onChange={this.handleChange}>
+              <option value="choose" >Choose sex</option>
+              <option value="male" >male</option>
+              <option value="female" >female</option>
+            </select>
+            {/* Tu ma być dopisany wybór M/K w select lub checkbox */}
+          </label>
+          <br />
         </div>
       </React.Fragment>
     );
