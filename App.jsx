@@ -11,22 +11,16 @@ class InfoField extends React.Component {
     this.setState({
       [e.target.name]: e.target.value
     });
-  };
-
-  bowCalculate = (e, height) => {
-    if (this.state.height >= "152" && this.state.height <= "152") {
+    if (this.state.height >= "152" && this.state.height < "165") {
       this.setState({
-        [e.target.name]: e.target.value,
-        bowLength: `60-64"`
+        bowLength: '60-64"'
       });
-    } else if (this.state.height >= "165" && this.state.height <= "168") {
+    } else if (this.state.height >= "165" && this.state.height < "170") {
       this.setState({
-        [e.target.name]: e.target.value,
         bowLength: `65-66"`
       });
-    } else if (this.state.height >= "170" && this.state.height <= "173") {
+    } else if (this.state.height >= "170" && this.state.height < "175") {
       this.setState({
-        [e.target.name]: e.target.value,
         bowLength: `67-68"`
       });
     } else if (this.height >= "175" && this.height <= "178") {
@@ -37,6 +31,7 @@ class InfoField extends React.Component {
   };
 
   render() {
+    const { bowLength, height } = this.state;
     return (
       <React.Fragment>
         <h1>Archery app</h1>
@@ -99,8 +94,9 @@ class InfoField extends React.Component {
             </select>
           </label>
           <br />
-          <h2 name="bowLength" onChange={this.bowCalculate}>
-            Twoje dane:{this.state.bowLength}
+          <h2 onChange={this.bowCalculate}>
+            Twoje dane:
+            {bowLength}
           </h2>
         </div>
       </React.Fragment>
