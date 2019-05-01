@@ -48,7 +48,7 @@ class InfoField extends React.Component {
               className="form__input"
               name="arms"
               type="number"
-              placeholder="0cm"
+              placeholder="0 cm"
               min="0"
               max="200"
               value={this.props.arms}
