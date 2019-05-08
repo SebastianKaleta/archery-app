@@ -11,19 +11,24 @@ class InfoField extends React.Component {
     this.setState({
       [e.target.name]: e.target.value
     });
-    if (this.state.height >= "152" && this.state.height < "165") {
+    if (e.target.value < 152) {
       this.setState({
-        bowLength: '60-64"'
+        bowLength: " "
       });
-    } else if (this.state.height >= "165" && this.state.height < "170") {
+    }
+    if (e.target.value >= 152 && e.target.value <= 165) {
+      this.setState({
+        bowLength: `60-64"`
+      });
+    } else if (e.target.value > 165 && e.target.value <= 170) {
       this.setState({
         bowLength: `65-66"`
       });
-    } else if (this.state.height >= "170" && this.state.height < "175") {
+    } else if (e.target.value > "170" && e.target.value <= "175") {
       this.setState({
         bowLength: `67-68"`
       });
-    } else if (this.height >= "175" && this.height <= "178") {
+    } else if (e.target.value > "175" && e.target.value <= "178") {
       this.setState({
         bowLength: `69-70"`
       });
@@ -94,10 +99,8 @@ class InfoField extends React.Component {
             </select>
           </label>
           <br />
-          <h2 onChange={this.bowCalculate}>
-            Twoje dane:
-            {bowLength}
-          </h2>
+          <h2>Twoje dane:</h2>
+          <p onChange={this.bowCalculate}>Długość łuku: {bowLength}</p>
         </div>
       </React.Fragment>
     );
