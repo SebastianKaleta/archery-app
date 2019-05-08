@@ -7,7 +7,10 @@ class InfoField extends React.Component {
     bowstring: "",
     arrow: "",
     sex: "",
-    bowLength: ""
+    maleStats: [],
+    femaleStats: [],
+    bowLength: "",
+    info: ""
   };
 
   handleChange = e => {
@@ -74,6 +77,55 @@ class InfoField extends React.Component {
       });
     }
   };
+
+  handleChangeSex = e => {
+    this.setState({
+      sex: e.target.value
+    });
+    if (e.target.value === "male") {
+      this.setState({
+        maleStats: [
+          "8-12 lat – 8-10 kg, ",
+          "12-15 lat – 13-15kg, ",
+          "15-18 lat – 16-18kg"
+        ],
+        femaleStats: []
+      });
+    } else if (e.target.value === "female") {
+      this.setState({
+        maleStats: [],
+        femaleStats: [
+          "8-12 lat – 8 kg, ",
+          "12-15 lat – 10-14 kg, ",
+          "15-18 lat – 14-16kg"
+        ]
+      });
+    } else {
+      this.setState({
+        maleStats: [],
+        femaleStats: []
+      });
+    }
+  };
+  handleChangeLvl = e => {
+    this.setState({
+      level: e.target.value
+    });
+
+    if (e.target.value === "beginner") {
+      this.setState({
+        info: "Jesteś początkujący!! Nie przesadź z siłą!"
+      });
+    } else if (e.target.value === "medium") {
+      this.setState({
+        info: "Jesteś na półmetku, sporo już umiesz, ale musisz się douczyć"
+      });
+    } else if (e.target.value === "expert") {
+      this.setState({
+        info: "No no, wiesz już bardzo dużo"
+      });
+    }
+  };
   render() {
     const { bowLength, pullForce, bowstring, arrow } = this.state;
     return (
@@ -115,12 +167,12 @@ class InfoField extends React.Component {
               className="form__input"
               name="level"
               value={this.state.level}
-              onChange={this.handleChange}
+              onChange={this.handleChangeLvl}
             >
               <option value="choose">Choose level</option>
-              <option value="beginner">Beginner</option>
-              <option value="medium">Medium</option>
-              <option value="expert">Expert</option>
+              <option value="beginner">Początkujący</option>
+              <option value="medium">Średnio-zaawansowany</option>
+              <option value="expert">Zaawansowany</option>
             </select>
           </label>
           <br />
@@ -130,7 +182,7 @@ class InfoField extends React.Component {
               className="form__input"
               name="sex"
               value={this.state.sex}
-              onChange={this.handleChange}
+              onChange={this.handleChangeSex}
             >
               <option value="choose">Choose sex</option>
               <option value="male">male</option>
@@ -143,6 +195,17 @@ class InfoField extends React.Component {
           <p>Siła naciągu: {pullForce}</p>
           <p> Liczba nitek w cięciwie powinna wynosić: {bowstring}</p>
           <p>Długość strzały: {arrow}</p>
+          {/* ---------------------------------------------------- */}
+          {/* płeć i sugestie mają być w osobnym div jako informacja-narazie sprawdzenie */}
+          <p>
+            Orientacyjne siły naciągu według płci i wieku:
+            <br />
+            {this.state.maleStats}
+            {this.state.femaleStats}
+          </p>
+          {/* Poziom narazie bez znaczenia */}
+          <p>Level: {this.state.info}</p>
+          {/* ----------------------------------------------------------- */}
         </div>
       </React.Fragment>
     );
