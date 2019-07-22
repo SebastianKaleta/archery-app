@@ -80,24 +80,74 @@ class InfoField extends React.Component {
   };
   handleChangeAge = e => {
     this.setState({
-      age: e.target.value
+      age: e.target.value,
+      sex: this.state.sex
     });
 
-    if (e.target.value === "8-12") {
+    if (
+      (e.target.value === "8-12" && this.state.sex === "female") ||
+      (this.state.sex === "female" && e.target.value === "8-12")
+    ) {
       this.setState({
-        infoAge: "/8-12 lat – 8 kg/"
+        infoAge: "8 kg",
+        sex: this.state.sex
       });
-    } else if (e.target.value === "12-15") {
+    } else if (
+      (e.target.value === "12-15" && this.state.sex === "female") ||
+      (this.state.sex === "female" && e.target.value === "12-15")
+    ) {
       this.setState({
-        infoAge: "12-15 lat – 10-14 kg"
+        infoAge: "10-14 kg",
+        sex: this.state.sex
       });
-    } else if (e.target.value === "15-18") {
+    } else if (
+      (e.target.value === "15-18" && this.state.sex === "female") ||
+      (this.state.sex === "female" && e.target.value === "15-18")
+    ) {
       this.setState({
-        infoAge: "15-18 lat – 14-16kg"
+        infoAge: "14-16kg",
+        sex: this.state.sex
       });
-    } else if (e.target.value === "18>") {
+    } else if (
+      (e.target.value === "18>" && this.state.sex === "female") ||
+      (this.state.sex === "female" && e.target.value === "18>")
+    ) {
       this.setState({
-        infoAge: "powyżej 18 lat – 16kg w zwyż"
+        infoAge: "16kg w zwyż",
+        sex: this.state.sex
+      });
+    }
+    if (
+      (e.target.value === "8-12" && this.state.sex === "male") ||
+      (this.state.sex === "male" && e.target.value === "8-12")
+    ) {
+      this.setState({
+        infoAge: "8-10 kg",
+        sex: this.state.sex
+      });
+    } else if (
+      (e.target.value === "12-15" && this.state.sex === "male") ||
+      (this.state.sex === "male" && e.target.value === "12-15")
+    ) {
+      this.setState({
+        infoAge: "13-15 kg",
+        sex: this.state.sex
+      });
+    } else if (
+      (e.target.value === "15-18" && this.state.sex === "male") ||
+      (this.state.sex === "male" && e.target.value === "15-18")
+    ) {
+      this.setState({
+        infoAge: "16-18kg",
+        sex: this.state.sex
+      });
+    } else if (
+      (e.target.value === "18>" && this.state.sex === "male") ||
+      (this.state.sex === "male" && e.target.value === "18>")
+    ) {
+      this.setState({
+        infoAge: "18kg w zwyż",
+        sex: this.state.sex
       });
     }
   };
@@ -105,35 +155,6 @@ class InfoField extends React.Component {
     this.setState({
       sex: e.target.value
     });
-    if (e.target.value === "male" && age !== "8-12") {
-      this.setState({
-        maleStats: [
-          "8-12 lat – 8-10 kg, ",
-          "12-15 lat – 13-15kg, ",
-          "15-18 lat – 16-18kg"
-        ],
-        femaleStats: []
-      });
-    } else if (e.target.value === "male" && age === "8-12") {
-      this.setState({
-        maleStats: ["8-12 lat – 8-10 kg !!!! "],
-        femaleStats: []
-      });
-    } else if (e.target.value === "female") {
-      this.setState({
-        maleStats: [],
-        femaleStats: [
-          "8-12 lat – 8 kg, ",
-          "12-15 lat – 10-14 kg, ",
-          "15-18 lat – 14-16kg"
-        ]
-      });
-    } else {
-      this.setState({
-        maleStats: [],
-        femaleStats: []
-      });
-    }
   };
   handleChangeLvl = e => {
     this.setState({
@@ -247,12 +268,12 @@ class InfoField extends React.Component {
           <p>Długość strzały: {arrow}</p>
           {/* ---------------------------------------------------- */}
           {/* płeć i sugestie mają być w osobnym div jako informacja-narazie sprawdzenie */}
-          <p>
+          {/* <p>
             Orientacyjne siły naciągu według płci i wieku:
             <br />
             {this.state.maleStats}
             {this.state.femaleStats}
-          </p>
+          </p> */}
           <p>Zalecenia według wieku: {this.state.infoAge}</p>
           {/* Poziom narazie bez znaczenia */}
           <p>Level: {this.state.info}</p>
