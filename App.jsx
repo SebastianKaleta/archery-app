@@ -1,18 +1,22 @@
 class InfoField extends React.Component {
-  state = {
-    level: "",
-    height: "",
-    armsLength: "",
-    pullForce: "",
-    bowstring: "",
-    arrow: "",
-    sex: "",
-    maleStats: [],
-    femaleStats: [],
-    bowLength: "",
-    info: "",
-    age: ""
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      level: "",
+      height: "",
+      armsLength: "",
+      pullForce: "",
+      bowstring: "",
+      arrow: "",
+      sex: "",
+      maleStats: [],
+      femaleStats: [],
+      bowLength: "",
+      info: "",
+      infoAge: "",
+      age: ""
+    };
+  }
 
   handleChange = e => {
     this.setState({
@@ -80,8 +84,8 @@ class InfoField extends React.Component {
   };
   handleChangeAge = e => {
     this.setState({
-      age: e.target.value,
-      sex: this.state.sex
+      sex: this.state.sex,
+      age: e.target.value
     });
 
     if (
@@ -178,58 +182,15 @@ class InfoField extends React.Component {
       });
     }
   };
+
   render() {
     const { bowLength, pullForce, bowstring, arrow } = this.state;
     return (
       <React.Fragment>
-        <h1>Archery app</h1>
-        <h2>Podaj dane</h2>
-        <div>
-          <label>
-            Podaj długość naciągu
-            <input
-              className="form__input"
-              name="arms"
-              type="number"
-              placeholder="0 cm"
-              min="0"
-              max="200"
-              value={this.state.armsLength}
-              onChange={this.handleLengthArrowAndLengthTension}
-            />
-          </label>
-          <br />
-          <label>
-            Podaj wzrost
-            <input
-              className="form__input"
-              name="height"
-              type="number"
-              placeholder="0cm"
-              min="0"
-              max="300"
-              value={this.state.height}
-              onChange={this.handleChange}
-            />
-          </label>
-          <br />
-          <label>
-            Podaj wiek
-            <select
-              className="form__input"
-              name="level"
-              value={this.state.age}
-              onChange={this.handleChangeAge}
-            >
-              <option value="chooseAge">Określ przedział wiekowy</option>
-              <option value="8-12">8-12</option>
-              <option value="12-15">12-15</option>
-              <option value="15-18">15-18</option>
-              <option value="18>">18 i więcej</option>
-            </select>
-          </label>
-          <br />
-          <label>
+        <div className="date-input">
+          <h1 className="header-title">Archery app</h1>
+          <h2 className="header-undertitle">Podaj dane</h2>
+          <label className="label-input box">
             Podaj stopień zaawansowania
             <select
               className="form__input"
@@ -247,7 +208,7 @@ class InfoField extends React.Component {
           </label>
 
           <br />
-          <label>
+          <label className="label-input box">
             Podaj płeć
             <select
               className="form__input"
@@ -261,23 +222,86 @@ class InfoField extends React.Component {
             </select>
           </label>
           <br />
-          <h2>Twoje dane:</h2>
-          <p onChange={this.bowCalculate}>Długość łuku: {bowLength}</p>
-          <p>Siła naciągu: {pullForce}</p>
-          <p> Liczba nitek w cięciwie powinna wynosić: {bowstring}</p>
-          <p>Długość strzały: {arrow}</p>
-          {/* ---------------------------------------------------- */}
-          {/* płeć i sugestie mają być w osobnym div jako informacja-narazie sprawdzenie */}
-          {/* <p>
-            Orientacyjne siły naciągu według płci i wieku:
-            <br />
-            {this.state.maleStats}
-            {this.state.femaleStats}
-          </p> */}
-          <p>Zalecenia według wieku: {this.state.infoAge}</p>
-          {/* Poziom narazie bez znaczenia */}
-          <p>Level: {this.state.info}</p>
-          {/* ----------------------------------------------------------- */}
+          <label className="label-input box">
+            Podaj wiek
+            <select
+              className="form__input"
+              name="level"
+              value={this.state.age}
+              onChange={this.handleChangeAge}
+            >
+              <option value="chooseAge">Określ przedział wiekowy</option>
+              <option value="8-12">8-12</option>
+              <option value="12-15">12-15</option>
+              <option value="15-18">15-18</option>
+              <option value="18>">18 i więcej</option>
+            </select>
+          </label>
+          <br />
+
+          <label className="label-input box">
+            Podaj długość naciągu
+            <input
+              className="form__input"
+              name="arms"
+              type="number"
+              placeholder="0 cm"
+              min="0"
+              max="200"
+              value={this.state.armsLength}
+              onChange={this.handleLengthArrowAndLengthTension}
+            />
+          </label>
+          <br />
+          <label className="label-input box">
+            Podaj wzrost
+            <input
+              className="form__input"
+              name="height"
+              type="number"
+              placeholder="0cm"
+              min="0"
+              max="300"
+              value={this.state.height}
+              onChange={this.handleChange}
+            />
+          </label>
+          <br />
+
+          <h2 className="header-undertitle">Twoje dane:</h2>
+          <section className="section-flex">
+            <p className="para-block" onChange={this.bowCalculate}>
+              Długość łuku: <span>{bowLength}</span>
+            </p>
+            <p className="para-block">
+              Siła naciągu: <span>{pullForce}</span>
+            </p>
+            <p className="para-block">
+              {" "}
+              Liczba nitek w cięciwie powinna wynosić: <span>{bowstring}</span>
+            </p>
+            <p className="para-block">
+              Długość strzały:<span> {arrow}</span>
+            </p>
+            {/* ---------------------------------------------------- */}
+
+            <p className="para-block">
+              Zalecenia według wieku: <span>{this.state.infoAge}</span>
+            </p>
+            {/* Poziom narazie bez znaczenia */}
+            <p className="para-block">
+              Level: <span>{this.state.info}</span>
+            </p>
+            {/* ----------------------------------------------------------- */}
+          </section>
+          <h2 className="header-undertitle">Tu będą dane przedmiotów</h2>
+          <section className="data-info">
+            <div className="img-item">
+              image
+              <img src="" alt="" />
+            </div>
+            <section className="describe-item">Opis przedmiotów</section>
+          </section>
         </div>
       </React.Fragment>
     );
